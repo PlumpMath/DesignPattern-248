@@ -13,7 +13,8 @@ public class Demo01 {
 		 * 3、java编译的自动装箱、拆箱
 		 * 4、Integer装箱的对象缓存
 		 */
-		swap(a, b);
+		//swap(a, b);
+		swap3(a, b);
 		System.out.println("after:a="+a+",b="+b);
 	}
 	
@@ -42,5 +43,26 @@ public class Demo01 {
 	private static void swap2(Integer i1,Integer i2){
 		System.out.println("after:a="+i2+",b="+i1);
 		System.exit(0);
+	}
+	//修改值
+	private static void swap3(Integer i1,Integer i2){
+		try {
+			Field f = Integer.class.getDeclaredField("value");
+			f.setAccessible(true);
+			f.set(i1, i1*100);
+			f.set(i2, i2*100);
+		} catch (NoSuchFieldException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
